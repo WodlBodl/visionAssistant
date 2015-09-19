@@ -1,1 +1,1 @@
-# visionAssistant
+# Assistant for the visually impaired
