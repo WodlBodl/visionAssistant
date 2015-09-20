@@ -9,7 +9,7 @@ import math
 
 while True:
     ### Get button input ###
-    if (get_button() == True):
+    if (_input.get_button() == True):
         _input.get_frame()
         print "Button Pressed"
         current_tags = []
