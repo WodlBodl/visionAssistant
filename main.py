@@ -1,6 +1,7 @@
 from backend import tagging, faceRecognition
 #from backend import textProcess
 from hardware import _input
+import thread
 import subprocess
 from multiprocessing import Pool
 import time
