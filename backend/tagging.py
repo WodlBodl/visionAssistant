@@ -19,9 +19,7 @@ Inputs:
 Outputs:
     - contentId, string
 '''
-def postImage():
-    imgPath = 'images/input.jpg'
-
+def postImage(imgPath):
     urlContent = imaggaUrl + 'content'
     response = requests.post(urlContent, headers=headers, files={'file': open(imgPath, 'rb')})
 
@@ -39,7 +37,7 @@ Outputs:
     - tags, array, each entry is a dictionary with the following
         keys {'tag', 'confidence'}
 '''
-def tagImage():
+def tagImage(imgPath):
     tags = []
     # Obtains the iamge ID
     imgContentId = postImage();
@@ -57,7 +55,7 @@ def tagImage():
     deletedResponse = requests.delete(deleteUrl, headers=headers)
 
     for tag in unfilteredTags:
-        if float(tag['confidence']) > 20:
+        if float(tag['confidence']) > 15:
             tags.append(tag)
 
     return tags
