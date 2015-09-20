@@ -1,4 +1,5 @@
-from backend import tagging, faceRecognition, textProcess
+from backend import tagging, faceRecognition
+#from backend import textProcess
 from hardware import _input
 import subprocess
 import thread
