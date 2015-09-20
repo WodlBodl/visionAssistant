@@ -4,7 +4,7 @@ import numpy as np
 import os
 from sklearn import svm
 # from sklearn.linear_model import SGDClassifier
-# from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder
 # from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.neighbors import KNeighborsClassifier
 import time

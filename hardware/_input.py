@@ -1,5 +1,5 @@
-import os
-from RPi.GPIO import GPIO
+import subprocess
+import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -8,9 +8,9 @@ BUTTON = 16
 GPIO.setup(BUTTON, GPIO.IN)
 
 def get_frame():
-    os.system("fswebcam -d /dev/video1 --no-banner -p YUYV frame.jpg")
+    subprocess.call("fswebcam -d /dev/video1 --no-banner -p YUYV frame.jpg", shell=True)
 
-def button():
+def get_button():
     if GPIO.input(BUTTON):
         return False
     return True

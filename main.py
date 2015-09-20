@@ -1,8 +1,8 @@
 from backend import tagging, faceRecognition, textProcess
 from hardware import _input
+import subprocess
 import thread
 import time
-import os
 import math
 
 frame_access = thread.allocate_lock()
@@ -55,11 +55,11 @@ def image_process_thread():
                             del new_text[index]
                 current_text = new_text
             for tag in current_tags:
-                os.system('espeak -v en "'+str(tag)+'"')
+                subprocess.call('espeak -v en "'+str(tag)+'"', shell=True)
             for word in current_text:
-                os.system('espeak -v en "'+str(word)+'"')
+                subprocess.call('espeak -v en "'+str(word)+'"', shell=True)
             if nothing in current_tags:
-                os.system('espeak -v en "Nothing new"')
+                subprocess.call('espeak -v en "Nothing new"', shell = True)
 
 
 
