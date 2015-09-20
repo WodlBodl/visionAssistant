@@ -32,11 +32,10 @@ def image_process_thread():
         if (request_description == True):
             with frame_access:
                 ### Describe situation ###
-                new_tags = []
-                new_text = []
                 new_tags = tagging.tagImage("/home/pi/visionAssistant/frame.jpg")
                 new_tags.extend(faceRecognition("/home/pi/visionAssistant/frame.jpg"))
-                text = textProcess.textParse("/home/pi/visionAssistant/frame.jpg")
+                #new_text = textProcess.textParse("/home/pi/visionAssistant/frame.jpg")
+                new_text = []
                 if (len(new_tags)-len(current_tags)) < 3:
                     same = []
                     for tag in current_tags:
@@ -55,7 +54,6 @@ def image_process_thread():
                         for index in same:
                             del new_text[index]
                 current_text = new_text
-                current_tags = new_tags
             for tag in current_tags:
                 os.system('espeak -v en "'+str(tag)+'"')
             for word in current_text:
