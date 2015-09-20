@@ -8,7 +8,7 @@ BUTTON = 16
 GPIO.setup(BUTTON, GPIO.IN)
 
 def get_frame():
-    subprocess.call("fswebcam -d /dev/video1 --no-banner -p YUYV frame.jpg", shell=True)
+    subprocess.call("fswebcam -d /dev/video0 --no-banner -p YUYV frame.jpg", shell=True)
 
 def get_button():
     if GPIO.input(BUTTON):

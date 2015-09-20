@@ -2,7 +2,7 @@ from backend import tagging, faceRecognition
 #from backend import textProcess
 from hardware import _input
 import subprocess
-import thread
+from multiprocessing import Pool
 import time
 import math
 
@@ -56,14 +56,14 @@ def image_process_thread():
                             del new_text[index]
                 current_text = new_text
             for tag in current_tags:
-                subprocess.call('espeak -v en "'+str(tag)+'"', shell=True)
+                subprocess.call('espeak -v en "'+str(tag)+'" &', shell=True)
             for word in current_text:
-                subprocess.call('espeak -v en "'+str(word)+'"', shell=True)
+                subprocess.call('espeak -v en "'+str(word)+'" &', shell=True)
             if nothing in current_tags:
-                subprocess.call('espeak -v en "Nothing new"', shell = True)
+                subprocess.call('espeak -v en "Nothing new" &', shell = True)
 
+pool = Pool(processes=3)
 
-
-thread.start_new_thread(imaging_thread(), ())
-thread.start_new_thread(input_thread(), ())
-thread.start_new_thread(image_process_thread(), ())
+pool.map(imaging_thread(), ())
+pool.map(input_thread(), ())
+pool.map(image_process_thread(), ())
