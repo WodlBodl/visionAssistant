@@ -17,7 +17,9 @@ while True:
         ### Describe situation ###
         new_tags = tagging.tagImage("/home/pi/visionAssistant/frame.jpg")
         new_tags.extend(faceRecognition("/home/pi/visionAssistant/frame.jpg"))
-        new_text = textProcess.textParse("/home/pi/visionAssistant/frame.jpg")
+        subprocess.call('convert frame.jpg frame.tiff', shell=True)
+        subprocess.call('java -jar ocr.jar ~/visionAssistant/backend/ocr/Tess4J/lib/win32-x86 ~/visionAssistant/frame.tiff ~/visionAssistant/backend/ocr/Tess4J/tessdata ~/visionAssistant', shell=True)
+        new_text = textProcess.textParse("/home/pi/visionAssistant/frame.tiff")
         new_text = []
         if (len(new_tags)-len(current_tags)) < 3:
             same = []
