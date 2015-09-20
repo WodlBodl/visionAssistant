@@ -6,10 +6,19 @@ import subprocess
 from multiprocessing import Pool
 import time
 import math
-
 frame_access = thread.allocate_lock()
+
 sound_output_access = thread.allocate_lock()
 request_description = False
+
+def f(x):
+    if x == 1:
+        imaging_thread()
+    elif x == 2:
+        image_process_thread()
+    elif x == 3:
+        input_thread()
+    return
 
 def imaging_thread():
     while True:
@@ -63,8 +72,7 @@ def image_process_thread():
             if nothing in current_tags:
                 subprocess.call('espeak -v en "Nothing new" &', shell = True)
 
-pool = Pool(processes=3)
 
-pool.map(imaging_thread(), ())
-pool.map(input_thread(), ())
-pool.map(image_process_thread(), ())
+if __name__ == '__main__':
+    p = Pool(5)
+    print(p.map(f, [1, 2, 3]))
